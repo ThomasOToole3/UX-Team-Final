@@ -1,0 +1,465 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+h1 {
+    text-align: center;
+    font-size: 55px;
+    font-family: Costa Rica;
+}
+
+
+
+
+
+
+
+
+body {
+    background-color: #d3d3d3;
+}
+
+
+
+
+
+
+
+
+nav {
+    overflow: hidden;
+    background-color: #3f83c2;
+    position: sticky;
+    top: 0; /* Stick to the top of the page */
+    box-shadow: 1px 10px 5px rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+
+
+
+
+    nav a {
+        float: left;
+        color: #f1eded;
+        text-align: center;
+        padding: 2% 3%;
+        text-decoration: none;
+        font-size: 25px;
+    }
+
+
+
+
+
+
+
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+
+
+
+
+
+
+
+        nav a.active {
+            background-color: #15639b;
+            color: rgb(248, 248, 249);
+        }
+
+
+
+
+
+
+
+
+/*This part of the code allows the you to have a double line break <br>*/
+.double-space {
+    display: block;
+    content: "";
+    height: 1.5em;
+}
+
+
+
+
+
+
+
+
+/* It is part of the CSS takes care of the grid the form is placed in */
+.grid-container {
+    display: grid;
+    padding: 10px 10px;
+    background-color: #bcd8f1;
+    margin: 20px auto;
+    width: 90%;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+.grid-item {
+    border-bottom: 2px solid #000000;
+    padding: 10px;
+    font-size: 25px;
+    font-family: Impact;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+.one-item-in-one-row {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 500px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+.two-items-in-one-row {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+
+
+
+
+
+
+.three-items-in-one-row {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+
+
+
+
+
+
+/* This part of the CSS takes care of the forms */
+input[type=text] {
+    width: 100%;
+    padding: 9px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    -webkit-transition: 1s;
+    transition: 1s;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+    input[type=text]:focus {
+        border: 3px solid #515050;
+    }
+
+
+
+
+
+
+
+
+input[type=date] {
+    width: 100%;
+    padding: 9px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    -webkit-transition: 1s;
+    transition: 1s;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+    input[type=date]:focus {
+        border: 3px solid #515050;
+    }
+
+
+
+
+
+
+
+
+input[type=number] {
+    width: 60px; /* Adjust the width to fit three numbers */
+    padding: 9px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    -webkit-transition: 1s;
+    transition: 1s;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+    input[type=number]:focus {
+        border: 3px solid #515050;
+    }
+
+
+
+
+
+
+
+
+textarea {
+    width: 100%;
+    padding: 9px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    -webkit-transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+    textarea:focus {
+        border: 3px solid #515050;
+    }
+
+
+
+
+
+
+
+
+select {
+    width: 100%;
+    padding: 9px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    -webkit-transition: 1s;
+    transition: 1s;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+    select:focus {
+        border: 3px solid #515050;
+    }
+
+
+
+
+
+
+
+
+input[type=time] {
+    width: 95%;
+    padding: 9px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    -webkit-transition: 1s;
+    transition: 1s;
+    outline: none;
+    font-size: 25px;
+}
+
+
+
+
+
+
+
+
+    input[type=time]:focus {
+        border: 3px solid #515050;
+    }
+
+
+
+
+
+
+
+
+input[type=submit] {
+    width: 100%;
+    background-color: #0f578e;
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    margin: 20px 0px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+    input[type=submit]:hover {
+        background-color: #c3daf0;
+    }
+
+
+
+
+
+
+
+
+.center-button {
+    display: flex;
+    justify-content: center; /* Horizontally center the button */
+    align-items: center; /* Vertically center the button */
+}
+
+
+
+
+
+
+
+
+.large-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 60px;
+    font-family: Cooper Black;
+    font-size: 25px;
+    padding: 10px 20px;
+    background-color: #9ba8e2;
+    color: black;
+    border-radius: 8px; /* Rounded corners */
+}
+
+
+.pop-up-message {
+    float: none;
+    color: #0f578e;
+    width: 400px;
+    height: 150px;
+    font-size: 20px;
+    display: none;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Costa Rica";
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+
+#overlay {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+
+.small-button {
+    width: 100px;
+    height: 40px;
+    font-family: Cooper Black;
+    font-size: 15px;
+    padding: 10px 20px;
+    background-color: #9ba8e2;
+    color: black;
+    border-radius: 8px;
+}
