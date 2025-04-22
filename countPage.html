@@ -26,65 +26,106 @@
 
         <form>
 
-
             <div class="grid-container">
 
 
-                <div class="one-item-in-one-row">
-
+                <div class="three-items-in-one-row">
 
                     <div class="grid-item">
+                        <label for="sessionName" style="margin-right: 10px;">Session Name:</label>
+                        <select id="sessionName" name="sessionName" style="width: 200px;">
+                            <option value="">Select a session</option>
+                            <option value="session1">Developiny a Threat Modeling Mindset</option>
+                            <option value="session2">Session 2Building a machine vision model</option>
+                            <option value="session3">Top 10 AI security risks</option>
+                            <option value="session4">Cross-platform graphics in C#</option>
+                        </select>
+                    </div>
+
+                    <div class="grid-item">
+                        <label for="roomName" style="margin-right: 10px;">Room Name:</label>
+                        <select id="roomName" name="roomName" style="width: 200px;">
+                            <option value="">Select a room</option>
+                            <option value="roomA">Washington</option>
+                            <option value="roomB">Monroe</option>
+                            <option value="roomC">Adams</option>
+                            <option value="roomD">Bretton Woods</option>
+                        </select>
+                    </div>
+
+                    <div class="grid-item">
+                        <label for="timeslot" style="margin-right: 10px;">Start Time:</label>
+                        <select id="timeslot" name="timeslot" style="width: 200px;">
+                            <option value="">Select a time</option>
+                            <option value="timeA">11:30</option>
+                            <option value="timeB">1:00</option>
+                            <option value="timeC">2:15</option>
+                            <option value="timeD">3:30</option>
+                        </select>
+                    </div>
+                </div>
 
 
-                        <label for="timeSlots" style="margin-right: 10px;">Beginning:</label>
+
+                <div class="grid-container">
 
 
-                        <input type="text" id="beginningCount" name="beginningCount" placeholder=" " style="width: 200px;">
+                    <div class="one-item-in-one-row">
+
+
+                        <div class="grid-item">
+
+
+                            <label for="timeSlots" style="margin-right: 10px;">Beginning:</label>
+
+
+                            <input type="text" id="beginningCount" name="beginningCount" placeholder=" " style="width: 200px;">
+
+
+                        </div>
 
 
                     </div>
 
-
-                </div>
-
-                <div class="one-item-in-one-row">
+                    <div class="one-item-in-one-row">
 
 
-                    <div class="grid-item">
+                        <div class="grid-item">
 
 
-                        <label for="timeSlots" style="margin-right: 10px;">Middle:</label>
+                            <label for="timeSlots" style="margin-right: 10px;">Middle:</label>
 
 
-                        <input type="text" id="middleCount" name="middleCount" placeholder=" " style="width: 200px;">
+                            <input type="text" id="middleCount" name="middleCount" placeholder=" " style="width: 200px;">
 
 
-                    </div>
-
-
-                </div>
-
-                <div class="one-item-in-one-row">
-
-
-                    <div class="grid-item">
-
-
-                        <label for="timeSlots" style="margin-right: 10px;">End:</label>
-
-
-                        <input type="text" id="endCount" name="endCount" placeholder=" " style="width: 200px;">
+                        </div>
 
 
                     </div>
 
+                    <div class="one-item-in-one-row">
+
+
+                        <div class="grid-item">
+
+
+                            <label for="timeSlots" style="margin-right: 10px;">End:</label>
+
+
+                            <input type="text" id="endCount" name="endCount" placeholder=" " style="width: 200px;">
+
+
+                        </div>
+
+
+                    </div>
 
                 </div>
 
-            </div>
 
 
-        </form>
+</form>
 
 
         <div class="center-button">
