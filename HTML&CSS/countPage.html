@@ -39,6 +39,28 @@
                             <option value="session2">Session 2Building a machine vision model</option>
                             <option value="session3">Top 10 AI security risks</option>
                             <option value="session4">Cross-platform graphics in C#</option>
+                            <script>
+                                document.getElementById('sessionName').addEventListener('change', function() {
+                                    var sessionName = document.getElementById('sessionName').value;
+                                    if (sessionName === 'session1') {
+                                        document.getElementById('roomName').value = 'roomA';
+                                        document.getElementById('timeslot').value = 'timeA';
+                                       
+                                    } 
+                                    else if (sessionName === 'session2') {
+                                            document.getElementById('roomName').value = 'roomB';
+                                            document.getElementById('timeslot').value = 'timeB';
+                                        }
+                                    else if (sessionName === 'session3') {
+                                            document.getElementById('roomName').value = 'roomC';
+                                            document.getElementById('timeslot').value = 'timeC';
+                                    }
+                                    else if (sessionName === 'session4') {
+                                            document.getElementById('roomName').value = 'roomD';
+                                            document.getElementById('timeslot').value = 'timeD';
+                                    }
+                                });
+                            </script>
                         </select>
                     </div>
 
