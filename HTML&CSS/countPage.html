@@ -85,6 +85,27 @@
                             <option value="timeD">3:30</option>
                         </select>
                     </div>
+                    <script>
+                        document.getElementById('roomName').addEventListener('change', autofillSession);
+                        document.getElementById('timeslot').addEventListener('change', autofillSession);
+
+                        function autofillSession() {
+                            const roomName = document.getElementById('roomName').value;
+                            const timeslot = document.getElementById('timeslot').value;
+
+                            if (roomName === 'roomA' && timeslot === 'timeA') {
+                                document.getElementById('sessionName').value = 'session1';
+                            } else if (roomName === 'roomB' && timeslot === 'timeB') {
+                                document.getElementById('sessionName').value = 'session2';
+                            } else if (roomName === 'roomC' && timeslot === 'timeC') {
+                                document.getElementById('sessionName').value = 'session3';
+                            } else if (roomName === 'roomD' && timeslot === 'timeD') {
+                                document.getElementById('sessionName').value = 'session4';
+                            } else {
+                                document.getElementById('sessionName').value = '';
+                            }
+                        }
+                    </script>
                 </div>
 
 
