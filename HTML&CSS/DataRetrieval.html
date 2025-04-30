@@ -1,40 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Presentation Attendance Data</title>
-  <link rel="stylesheet" href="DataRetrievalCSS.css" />
-  <script src="../JavaScript/MockData.js"></script>
+  <title>Data Retrieval</title>
+  <link rel="stylesheet" type="text/css" href="DataRetrievalCSS.css">
 </head>
+
 <body>
-  <h1>Code Camp Data</h1>
+  <header>
+  </header>
 
-  <div class="right-button">
-    <button class="large-button" id="filter-button">Filter View</button>
-  </div>
+  <br class="double-space">
 
-  <div class="table-container">
-    <table id="dataTable">
-      <thead>
-        <tr>
-          <th>Session Name</th>
-          <th>Time Slot</th>
-          <th>Presenter First Name</th>
-          <th>Presenter Last Name</th>
-          <th>Room Name</th>
-          <th>Room Capacity</th>
-          <th>Beginning</th>
-          <th>Middle</th>
-          <th>End</th>
-        </tr>
-      </thead>
+  <h1 class="h1">Data Retrieval</h1>
 
-      <tbody>
-        
-      </tbody>
-        <!-- JS will populate this -->
-    </table>
-  </div>
+  <section>
+    <br class="double-space">
+
+    <div class="grid-container">
+
+      <div class="four-items-in-one-row">
+        <div class="grid-item">
+          <label for="sessionName">Session Name:</label>
+          <select id="sessionName" name="sessionName" style="width: 140px;"></select>
+        </div>
+
+        <div class="grid-item">
+          <label for="presenter">Presenter:</label>
+          <input list="presenters" id="presenter" name="presenter" style="width: 170px;">
+          <datalist id="presenters"></datalist>
+        </div>
+
+        <div class="grid-item">
+          <label for="room">Room:</label>
+          <select id="room" name="room" style="width: 180px;"></select>
+        </div>
+
+        <div class="grid-item">
+          <label for="sessionTime">Time Slot:</label>
+          <select id="sessionTime" name="sessionTime" style="width: 180px;"></select>
+        </div>
+      </div>
+      <!-- This is how the data should be presented -->
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-title">Developing a Threat Modeling Mindset</div>
+            <div class="card-subtitle">Alice Johnson</div>
+          </div>
+          <hr>
+
+          <div class="card-mid">
+            <span>11:30 AM</span>
+            <span>Washington</span>
+          </div>
+          <hr>
+
+          <div class="card-bottom">
+            <p>Beginning: 25</p>
+            <hr>
+            <p>Middle: 20</p>
+            <hr>
+            <p>End: 18</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-title">Top 10 AI Security Risks</div>
+            <div class="card-subtitle">Ben Carter</div>
+          </div>
+          <hr>
+
+          <div class="card-mid">
+            <span>2:15 PM</span>
+            <span>Adams</span>
+          </div>
+          <hr>
+
+          <div class="card-bottom">
+            <p>Beginning: 30</p>
+            <hr>
+            <p>Middle: 22</p>
+            <hr>
+            <p>End: 15</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+  <footer>
+  </footer>
 </body>
+
 </html>

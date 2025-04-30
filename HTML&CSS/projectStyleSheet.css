@@ -4,36 +4,15 @@
     box-sizing: border-box;
 }
 
-
-
-
-
-
-
-
 h1 {
     text-align: center;
     font-size: 55px;
     font-family: Costa Rica;
 }
 
-
-
-
-
-
-
-
 body {
     background-color: #d3d3d3;
 }
-
-
-
-
-
-
-
 
 nav {
     overflow: hidden;
@@ -43,52 +22,24 @@ nav {
     box-shadow: 1px 10px 5px rgba(0, 0, 0, 0.4);
 }
 
+nav a {
+    float: left;
+    color: #f1eded;
+    text-align: center;
+    padding: 2% 3%;
+    text-decoration: none;
+    font-size: 25px;
+}
 
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
 
-
-
-
-
-
-    nav a {
-        float: left;
-        color: #f1eded;
-        text-align: center;
-        padding: 2% 3%;
-        text-decoration: none;
-        font-size: 25px;
-    }
-
-
-
-
-
-
-
-
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-
-
-
-
-
-
-
-        nav a.active {
-            background-color: #15639b;
-            color: rgb(248, 248, 249);
-        }
-
-
-
-
-
-
-
+nav a.active {
+    background-color: #15639b;
+    color: rgb(248, 248, 249);
+}
 
 /*This part of the code allows the you to have a double line break <br>*/
 .double-space {
@@ -96,13 +47,6 @@ nav {
     content: "";
     height: 1.5em;
 }
-
-
-
-
-
-
-
 
 /* It is part of the CSS takes care of the grid the form is placed in */
 .grid-container {
@@ -116,13 +60,6 @@ nav {
     border-radius: 10px;
 }
 
-
-
-
-
-
-
-
 .grid-item {
     border-bottom: 2px solid #000000;
     padding: 10px;
@@ -135,13 +72,6 @@ nav {
     width: 100%;
 }
 
-
-
-
-
-
-
-
 .one-item-in-one-row {
     grid-column: span 3;
     display: grid;
@@ -150,38 +80,17 @@ nav {
     margin: 0 auto;
 }
 
-
-
-
-
-
-
-
 .two-items-in-one-row {
     grid-column: span 3;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-
-
-
-
-
-
-
 .three-items-in-one-row {
     grid-column: span 3;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
-
-
-
-
-
-
-
 
 /* This part of the CSS takes care of the forms */
 input[type=text] {
@@ -195,23 +104,9 @@ input[type=text] {
     outline: none;
 }
 
-
-
-
-
-
-
-
-    input[type=text]:focus {
-        border: 3px solid #515050;
-    }
-
-
-
-
-
-
-
+input[type=text]:focus {
+    border: 3px solid #515050;
+}
 
 input[type=date] {
     width: 100%;
@@ -224,23 +119,9 @@ input[type=date] {
     outline: none;
 }
 
-
-
-
-
-
-
-
-    input[type=date]:focus {
-        border: 3px solid #515050;
-    }
-
-
-
-
-
-
-
+input[type=date]:focus {
+    border: 3px solid #515050;
+}
 
 input[type=number] {
     width: 60px; /* Adjust the width to fit three numbers */
@@ -253,23 +134,9 @@ input[type=number] {
     outline: none;
 }
 
-
-
-
-
-
-
-
-    input[type=number]:focus {
-        border: 3px solid #515050;
-    }
-
-
-
-
-
-
-
+input[type=number]:focus {
+    border: 3px solid #515050;
+}
 
 textarea {
     width: 100%;
@@ -286,23 +153,9 @@ textarea {
     outline: none;
 }
 
-
-
-
-
-
-
-
-    textarea:focus {
-        border: 3px solid #515050;
-    }
-
-
-
-
-
-
-
+textarea:focus {
+    border: 3px solid #515050;
+}
 
 select {
     width: 100%;
@@ -315,23 +168,9 @@ select {
     outline: none;
 }
 
-
-
-
-
-
-
-
-    select:focus {
-        border: 3px solid #515050;
-    }
-
-
-
-
-
-
-
+select:focus {
+    border: 3px solid #515050;
+}
 
 input[type=time] {
     width: 95%;
@@ -345,23 +184,9 @@ input[type=time] {
     font-size: 25px;
 }
 
-
-
-
-
-
-
-
-    input[type=time]:focus {
-        border: 3px solid #515050;
-    }
-
-
-
-
-
-
-
+input[type=time]:focus {
+    border: 3px solid #515050;
+}
 
 input[type=submit] {
     width: 100%;
@@ -374,36 +199,15 @@ input[type=submit] {
     cursor: pointer;
 }
 
-
-
-
-
-
-
-
-    input[type=submit]:hover {
-        background-color: #c3daf0;
-    }
-
-
-
-
-
-
-
+input[type=submit]:hover {
+    background-color: #c3daf0;
+}
 
 .center-button {
     display: flex;
     justify-content: center; /* Horizontally center the button */
     align-items: center; /* Vertically center the button */
 }
-
-
-
-
-
-
-
 
 .large-button {
     display: flex;
@@ -418,7 +222,6 @@ input[type=submit] {
     color: black;
     border-radius: 8px; /* Rounded corners */
 }
-
 
 .pop-up-message {
     float: none;
@@ -440,7 +243,6 @@ input[type=submit] {
     z-index: 2;
 }
 
-
 #overlay {
     display: none;
     position: fixed;
@@ -451,7 +253,6 @@ input[type=submit] {
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
-
 
 .small-button {
     width: 100px;
