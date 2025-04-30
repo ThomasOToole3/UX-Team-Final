@@ -165,6 +165,7 @@
                     </div>
 
                 </div>
+                
 
 
 
@@ -192,6 +193,40 @@
 
     <footer>
     </footer>
+    <script>
+                const rooms = {
+                    roomA: Math.floor(100),
+                    roomB: Math.floor(20),
+                    roomC: Math.floor(12),
+                    roomD: Math.floor(70),
+                    };
+                        function validateOverage() {
+                            const endCount = parseInt(document.getElementById("endCount").value) || 0;
+                            const roomName = document.getElementById('roomName').value;
+
+                            if (!rooms[roomName]) {
+                            alert("Please select a valid room.");
+                            return;
+                            }
+
+                            const roomCapacity = rooms[roomName];
+                            const overageLimit =
+                            roomCapacity > 40 ? roomCapacity * 1.4 : roomCapacity * 2;
+
+                            if (endCount > overageLimit) {
+                            alert(
+                                `Warning: The count (${endCount}) exceeds the overage limit for ${roomName} (${overageLimit.toFixed(
+                                0)}).`
+                            );
+                            } 
+                        }
+
+                    // Add event listener to the Save button
+                    document
+                        .getElementById("originalSaveBtn")
+                        .addEventListener("click", validateOverage);
+                </script>
+                
 </body>
 
 
