@@ -35,8 +35,8 @@
                         <label for="sessionName" style="margin-right: 10px;">Session Name:</label>
                         <select id="sessionName" name="sessionName" style="width: 200px;">
                             <option value="">Select a session</option>
-                            <option value="session1">Developiny a Threat Modeling Mindset</option>
-                            <option value="session2">Session 2Building a machine vision model</option>
+                            <option value="session1">Developing a Threat Modeling Mindset</option>
+                            <option value="session2">Building a machine vision model</option>
                             <option value="session3">Top 10 AI security risks</option>
                             <option value="session4">Cross-platform graphics in C#</option>
                             <script>
@@ -45,8 +45,8 @@
                                     if (sessionName === 'session1') {
                                         document.getElementById('roomName').value = 'roomA';
                                         document.getElementById('timeslot').value = 'timeA';
-                                       
-                                    } 
+
+                                    }
                                     else if (sessionName === 'session2') {
                                             document.getElementById('roomName').value = 'roomB';
                                             document.getElementById('timeslot').value = 'timeB';
@@ -165,11 +165,11 @@
                     </div>
 
                 </div>
-                
 
 
 
-</form>
+
+        </form>
 
 
         <div class="center-button">
@@ -218,15 +218,15 @@
                                 `Warning: The count (${endCount}) exceeds the overage limit for ${roomName} (${overageLimit.toFixed(
                                 0)}).`
                             );
-                            } 
+                            }
                         }
 
                     // Add event listener to the Save button
                     document
                         .getElementById("originalSaveBtn")
                         .addEventListener("click", validateOverage);
-                </script>
-                
+    </script>
+
 </body>
 
 
