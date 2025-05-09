@@ -12,7 +12,7 @@
 
   <br class="double-space">
 
-  <h1 class="h1">Data Retrieval</h1>
+  <h1 class="h1">Boston Code Camp 40</h1>
 
   <section>
     <br class="double-space">
@@ -21,14 +21,13 @@
 
       <div class="four-items-in-one-row">
         <div class="grid-item">
-          <label for="sessionName">Session Name:</label>
-          <select id="sessionName" name="sessionName" style="width: 140px;"></select>
+          <label for="sessionName">Session:</label>
+          <select id="sessionName" name="sessionName" style="width: 160px;"></select>
         </div>
 
         <div class="grid-item">
           <label for="presenter">Presenter:</label>
-          <input list="presenters" id="presenter" name="presenter" style="width: 170px;">
-          <datalist id="presenters"></datalist>
+          <select id="presenter" name="presenter" style="width: 170px;"></select>
         </div>
 
         <div class="grid-item">
@@ -41,18 +40,36 @@
           <select id="sessionTime" name="sessionTime" style="width: 180px;"></select>
         </div>
       </div>
-      <!-- This is how the data should be presented -->
-      <div class="card-grid">
 
+      <div class="room-details">
+        <div class="room-header">
+          <p class="session-title">Developing a Threat Modeling Mindset</p>
+          <p class="presenter-name">Alice Johnson</p>
+        </div>
+        <hr>
+        <div class="room-info">
+          <p class="room-title">Room A</p>
+          <p class="session-time">11:30 AM</p>
+        </div>
+        <hr>
+        <div class="attendance">
+          <div class="attendance-item">
+            <span>Beginning: 25</span>
+          </div>
+          <div class="attendance-item">
+            <span>Middle: 20</span>
+          </div>
+          <div class="attendance-item">
+            <span>End: 18</span>
+          </div>
+        </div>
       </div>
 
     </div>
-
   </section>
+
   <footer>
   </footer>
-  <script src="../JavaScript/MockData.js"></script>
-
 </body>
 
 </html>

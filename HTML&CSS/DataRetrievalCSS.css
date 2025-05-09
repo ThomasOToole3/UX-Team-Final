@@ -42,10 +42,11 @@ body {
   gap: 10px;
 }
 
+/* Top Section Labels */
 .grid-item label {
+  font-size: 20px; /* Increased from 16px */
   font-weight: bold;
-  white-space: nowrap;
-  font-size: 16px;
+  color: #333;
 }
 
 .four-items-in-one-row {
@@ -56,6 +57,7 @@ body {
   padding-bottom: 10px;
 }
 
+/* Dropdown Styling */
 select,
 input[list] {
   padding: 6px 10px;
@@ -125,4 +127,68 @@ input[list]:focus {
 hr {
   border: none;
   border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+/* Room Details */
+.room-details {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.session-title {
+  font-size: 22px; /* Increased from 20px */
+  font-weight: bold;
+  color: #1f4e79;
+}
+
+.presenter-name {
+  font-size: 20px; /* Increased from 18px */
+  color: #3a6ea5;
+}
+
+.room-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.room-title,
+.session-time {
+  font-size: 20px; /* Increased from 18px */
+  font-weight: bold;
+  color: #3a6ea5;
+}
+
+.attendance {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.attendance-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  font-size: 18px; /* Increased from 16px */
+  padding: 10px;
+  background-color: #e6e6e6;
+  border-radius: 5px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
 }
