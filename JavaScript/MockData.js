@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", initializeApp);
 const mockData = [
   {
     sessionId: 1,
-    sessionName: "Web Development Fundamentals",
+    sessionName: "Introduction to JavaScript",
     speaker: "John Doe",
     time: "10:00 AM - 11:00 AM",
     topic: "Introduction to JavaScript",
@@ -13,7 +13,7 @@ const mockData = [
   },
   {
     sessionId: 2,
-    sessionName: "CSS Mastery",
+    sessionName: "Advanced CSS Techniques",
     speaker: "Jane Smith",
     time: "11:30 AM - 12:30 PM",
     topic: "Advanced CSS Techniques",
@@ -22,7 +22,7 @@ const mockData = [
   },
   {
     sessionId: 3,
-    sessionName: "Frontend Development",
+    sessionName: "React for Beginners",
     speaker: "Alice Johnson",
     time: "1:00 PM - 2:00 PM",
     topic: "React for Beginners",
@@ -31,7 +31,7 @@ const mockData = [
   },
   {
     sessionId: 4,
-    sessionName: "Backend Development",
+    sessionName: "Node.js Best Practices",
     speaker: "Bob Brown",
     time: "2:30 PM - 3:30 PM",
     topic: "Node.js Best Practices",
@@ -40,7 +40,7 @@ const mockData = [
   },
   {
     sessionId: 5,
-    sessionName: "User Experience",
+    sessionName: "UX Design Principles",
     speaker: "Emily Davis",
     time: "4:00 PM - 5:00 PM",
     topic: "UX Design Principles",
@@ -53,44 +53,44 @@ function initializeApp() {
   populateDropdowns();
   initializeEventListeners();
   displayCards();
-  
 }
 
 function populateDropdowns() {
-  // Get unique values for each dropdown
+  // Gets unique values for dropdowns
   const sessionNames = [...new Set(mockData.map(session => session.sessionName))];
   const presenters = [...new Set(mockData.map(session => session.speaker))];
   const rooms = [...new Set(mockData.map(session => session.room))];
   const timeSlots = [...new Set(mockData.map(session => session.time))];
-  
-  // Populate session names dropdown
+
+  window.filterOptions = {
+    sessionNames,
+    presenters,
+    rooms,
+    timeSlots
+  };
+
   const sessionNameDropdown = document.getElementById('sessionName');
-  populateSelect(sessionNameDropdown, sessionNames, 'All Sessions');
-  
-  // Populate presenters datalist
+  populateSelect(sessionNameDropdown, sessionNames, 'Select a Session');
+
   const presentersList = document.getElementById('presenters');
   populateDatalist(presentersList, presenters);
-  
-  // Populate rooms dropdown
+
   const roomDropdown = document.getElementById('room');
-  populateSelect(roomDropdown, rooms, 'All Rooms');
-  
-  // Populate time slots dropdown
+  populateSelect(roomDropdown, rooms, 'Select a Room');
+
+
   const timeSlotDropdown = document.getElementById('sessionTime');
-  populateSelect(timeSlotDropdown, timeSlots, 'All Times');
+  populateSelect(timeSlotDropdown, timeSlots, 'Select a Time');
 }
 
 function populateSelect(selectElement, options, defaultOption) {
-  // Clear existing options
   selectElement.innerHTML = '';
-  
-  // Add default option
+
   const defaultOpt = document.createElement('option');
   defaultOpt.value = '';
   defaultOpt.textContent = defaultOption;
   selectElement.appendChild(defaultOpt);
-  
-  // Add options from data
+
   options.forEach(option => {
     const optElement = document.createElement('option');
     optElement.value = option;
@@ -100,10 +100,8 @@ function populateSelect(selectElement, options, defaultOption) {
 }
 
 function populateDatalist(datalistElement, options) {
-  // Clear existing options
   datalistElement.innerHTML = '';
-  
-  // Add options from data
+
   options.forEach(option => {
     const optElement = document.createElement('option');
     optElement.value = option;
@@ -112,11 +110,21 @@ function populateDatalist(datalistElement, options) {
 }
 
 function initializeEventListeners() {
-  // Add event listeners to all filter elements
-  document.getElementById('sessionName').addEventListener('change', displayCards);
-  document.getElementById('presenter').addEventListener('input', displayCards);
-  document.getElementById('room').addEventListener('change', displayCards);
-  document.getElementById('sessionTime').addEventListener('change', displayCards);
+  document.getElementById('sessionName').addEventListener('change', function () {
+    autoFillBasedOnSelection('sessionName');
+  });
+
+  document.getElementById('presenter').addEventListener('input', function () {
+    setTimeout(() => autoFillBasedOnSelection('presenter'), 100);
+  });
+
+  document.getElementById('room').addEventListener('change', function () {
+    autoFillBasedOnSelection('room');
+  });
+
+  document.getElementById('sessionTime').addEventListener('change', function () {
+    autoFillBasedOnSelection('sessionTime');
+  });
 }
 
 function displayCards() {
@@ -125,39 +133,48 @@ function displayCards() {
   const selectedPresenter = document.getElementById('presenter').value;
   const selectedRoom = document.getElementById('room').value;
   const selectedTime = document.getElementById('sessionTime').value;
-  
-  // Filter the data based on selections
+  const cardGrid = document.querySelector('.card-grid');
+  cardGrid.innerHTML = '';
+
+  // Checks if all dropdows are filled
+  if (!selectedSessionName || !selectedPresenter || !selectedRoom || !selectedTime) {
+    const messageElement = document.createElement('div');
+    messageElement.className = 'filter-message';
+    messageElement.textContent = 'Please select options for all filters to view sessions';
+    cardGrid.appendChild(messageElement);
+    return;
+  }
+
+  // Filter based on selection
   const filteredData = mockData.filter(session => {
-    // Check if session matches all selected filters
-    const matchesSessionName = !selectedSessionName || session.sessionName === selectedSessionName;
-    const matchesPresenter = !selectedPresenter || session.speaker === selectedPresenter;
-    const matchesRoom = !selectedRoom || session.room === selectedRoom;
-    const matchesTime = !selectedTime || session.time === selectedTime;
-    
+    const matchesSessionName = session.sessionName === selectedSessionName;
+    const matchesPresenter = session.speaker === selectedPresenter;
+    const matchesRoom = session.room === selectedRoom;
+    const matchesTime = session.time === selectedTime;
+
     return matchesSessionName && matchesPresenter && matchesRoom && matchesTime;
   });
-  
-  // Get the card grid container
-  const cardGrid = document.querySelector('.card-grid');
-  
-  // Clear existing cards
-  cardGrid.innerHTML = '';
-  
-  // Create and append cards for filtered data
-  filteredData.forEach(session => {
-    const card = createCard(session);
-    cardGrid.appendChild(card);
-  });
+
+  if (filteredData.length === 0) {
+    const noResultsMessage = document.createElement('div');
+    noResultsMessage.className = 'no-results-message';
+    noResultsMessage.textContent = 'No sessions match all selected criteria';
+    cardGrid.appendChild(noResultsMessage);
+  } else {
+    filteredData.forEach(session => {
+      const card = createCard(session);
+      cardGrid.appendChild(card);
+    });
+  }
 }
 
 function createCard(session) {
-  // Extract time from the time slot (e.g., "10:00 AM - 11:00 AM" -> "10:00 AM")
   const startTime = session.time.split(' - ')[0];
-  
+
   // Create card element
   const card = document.createElement('div');
   card.className = 'card';
-  
+
   card.innerHTML = `
     <div class="card-top">
       <div class="card-title">${session.topic}</div>
@@ -177,6 +194,52 @@ function createCard(session) {
       <p>End: ${session.viewCount.end}</p>
     </div>
   `;
-  
+
   return card;
+}
+
+function autoFillBasedOnSelection(changedFieldId) {
+  const selectedSessionName = document.getElementById('sessionName').value;
+  const selectedPresenter = document.getElementById('presenter').value;
+  const selectedRoom = document.getElementById('room').value;
+  const selectedTime = document.getElementById('sessionTime').value;
+
+  let matchingSessions = [];
+
+  switch (changedFieldId) {
+    case 'sessionName':
+      matchingSessions = mockData.filter(session => session.sessionName === selectedSessionName);
+      break;
+    case 'presenter':
+      matchingSessions = mockData.filter(session => session.speaker === selectedPresenter);
+      break;
+    case 'room':
+      matchingSessions = mockData.filter(session => session.room === selectedRoom);
+      break;
+    case 'sessionTime':
+      matchingSessions = mockData.filter(session => session.time === selectedTime);
+      break;
+  }
+
+  if (matchingSessions.length > 0) {
+    const sessionToUse = matchingSessions[0];
+
+    if (changedFieldId !== 'sessionName') {
+      document.getElementById('sessionName').value = sessionToUse.sessionName;
+    }
+
+    if (changedFieldId !== 'presenter') {
+      document.getElementById('presenter').value = sessionToUse.speaker;
+    }
+
+    if (changedFieldId !== 'room') {
+      document.getElementById('room').value = sessionToUse.room;
+    }
+
+    if (changedFieldId !== 'sessionTime') {
+      document.getElementById('sessionTime').value = sessionToUse.time;
+    }
+  }
+
+  displayCards();
 }

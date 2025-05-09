@@ -4,6 +4,23 @@
 <head>
     <title>Code Camp</title>
     <link rel="stylesheet" type="text/css" href="projectStyleSheet.css">
+    <style>
+        .error {
+            border: 2px solid red;
+            box-shadow: 0 0 5px red;
+        }
+    
+        .hidden {
+            display: none;
+        }
+    
+        #errorMessage {
+            color: red;
+            font-size: 0.9em;
+            margin-left: 10px;
+            font-family: Costa Rica;
+        }
+    </style>
 </head>
 
 
@@ -15,7 +32,7 @@
     <br class="double-space">
 
 
-    <h1 class="h1">Count</h1>
+    <h1 class="h1">Boston Code Camp 34</h1>
 
 
     <section>
@@ -158,6 +175,8 @@
 
                             <input type="text" id="endCount" name="endCount" placeholder=" " style="width: 200px;">
 
+                            <p id="endCount">
+                            <span id="errorMessage" class="hidden"></span>
 
                         </div>
 
@@ -194,37 +213,59 @@
     <footer>
     </footer>
     <script>
-                const rooms = {
-                    roomA: Math.floor(100),
-                    roomB: Math.floor(20),
-                    roomC: Math.floor(12),
-                    roomD: Math.floor(70),
-                    };
-                        function validateOverage() {
-                            const endCount = parseInt(document.getElementById("endCount").value) || 0;
-                            const roomName = document.getElementById('roomName').value;
+        const rooms = {
+            roomA: Math.floor(100),
+            roomB: Math.floor(20),
+            roomC: Math.floor(12),
+            roomD: Math.floor(70),
+        };
+    
+        function validateOverage() {
+            const endCountInput = document.getElementById("endCount");
+            const errorMessage = document.getElementById("errorMessage");
+            const endCount = parseInt(endCountInput.value) || 0;
+            const roomName = document.getElementById("roomName").value;
+    
+            // Clear previous error styles and messages
+            endCountInput.classList.remove("error");
+            errorMessage.textContent = "";
+            errorMessage.classList.add("hidden");
+    
+            if (!rooms[roomName]) {
+                alert("Please select a valid room.");
+                return;
+            }
+    
+            const roomCapacity = rooms[roomName];
+            const overageLimit = roomCapacity > 40 ? roomCapacity * 1.4 : roomCapacity * 2;
+    
+            if (endCount > overageLimit) {
+                // Highlight the input box and show the error message
+                endCountInput.classList.add("error");
+                errorMessage.textContent = `The count (${endCount}) exceeds the capacity limit for ${roomName} (${overageLimit.toFixed(0)}).`;
+                errorMessage.classList.remove("hidden");
+            }
+        }
+    
+        function clearErrorOnFocus() {
+        const endCountInput = document.getElementById("endCount");
+        const errorMessage = document.getElementById("errorMessage");
 
-                            if (!rooms[roomName]) {
-                            alert("Please select a valid room.");
-                            return;
-                            }
+        // Clear error styles and hide the error message
+        endCountInput.classList.remove("error");
+        errorMessage.textContent = "";
+        errorMessage.classList.add("hidden");
+    }
 
-                            const roomCapacity = rooms[roomName];
-                            const overageLimit =
-                            roomCapacity > 40 ? roomCapacity * 1.4 : roomCapacity * 2;
+    // Add event listener to the Save button
+    document
+        .getElementById("originalSaveBtn")
+        .addEventListener("click", validateOverage);
 
-                            if (endCount > overageLimit) {
-                            alert(
-                                `Warning: The count (${endCount}) exceeds the overage limit for ${roomName} (${overageLimit.toFixed(
-                                0)}).`
-                            );
-                            }
-                        }
-
-                    // Add event listener to the Save button
-                    document
-                        .getElementById("originalSaveBtn")
-                        .addEventListener("click", validateOverage);
+    // Add event listener to the input box to clear error on focus
+    document
+        .getElementById("endCount")
+        .addEventListener("focus", clearErrorOnFocus);
     </script>
 
 </body>
