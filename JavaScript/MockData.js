@@ -52,7 +52,8 @@ const mockData = [
 function initializeApp() {
   populateDropdowns();
   initializeEventListeners();
-  displayCards();
+  // Initial display
+  displaySessionDetails();
 }
 
 function populateDropdowns() {
@@ -72,12 +73,11 @@ function populateDropdowns() {
   const sessionNameDropdown = document.getElementById('sessionName');
   populateSelect(sessionNameDropdown, sessionNames, 'Select a Session');
 
-  const presentersList = document.getElementById('presenters');
-  populateDatalist(presentersList, presenters);
+  const presenterDropdown = document.getElementById('presenter');
+  populateSelect(presenterDropdown, presenters, 'Select a Presenter');
 
   const roomDropdown = document.getElementById('room');
   populateSelect(roomDropdown, rooms, 'Select a Room');
-
 
   const timeSlotDropdown = document.getElementById('sessionTime');
   populateSelect(timeSlotDropdown, timeSlots, 'Select a Time');
@@ -99,103 +99,86 @@ function populateSelect(selectElement, options, defaultOption) {
   });
 }
 
-function populateDatalist(datalistElement, options) {
-  datalistElement.innerHTML = '';
-
-  options.forEach(option => {
-    const optElement = document.createElement('option');
-    optElement.value = option;
-    datalistElement.appendChild(optElement);
-  });
-}
-
 function initializeEventListeners() {
-  document.getElementById('sessionName').addEventListener('change', function () {
+  document.getElementById('sessionName').addEventListener('change', function() {
     autoFillBasedOnSelection('sessionName');
   });
 
-  document.getElementById('presenter').addEventListener('input', function () {
-    setTimeout(() => autoFillBasedOnSelection('presenter'), 100);
+  document.getElementById('presenter').addEventListener('change', function() {
+    autoFillBasedOnSelection('presenter');
   });
 
-  document.getElementById('room').addEventListener('change', function () {
+  document.getElementById('room').addEventListener('change', function() {
     autoFillBasedOnSelection('room');
   });
 
-  document.getElementById('sessionTime').addEventListener('change', function () {
+  document.getElementById('sessionTime').addEventListener('change', function() {
     autoFillBasedOnSelection('sessionTime');
   });
 }
 
-function displayCards() {
+function displaySessionDetails() {
   // Get filter values
   const selectedSessionName = document.getElementById('sessionName').value;
   const selectedPresenter = document.getElementById('presenter').value;
   const selectedRoom = document.getElementById('room').value;
   const selectedTime = document.getElementById('sessionTime').value;
-  const cardGrid = document.querySelector('.card-grid');
-  cardGrid.innerHTML = '';
-
-  // Checks if all dropdows are filled
-  if (!selectedSessionName || !selectedPresenter || !selectedRoom || !selectedTime) {
-    const messageElement = document.createElement('div');
-    messageElement.className = 'filter-message';
-    messageElement.textContent = 'Please select options for all filters to view sessions';
-    cardGrid.appendChild(messageElement);
+  const roomDetailsContainer = document.querySelector('.room-details');
+  
+  // Check if any dropdown is selected
+  if (!selectedSessionName && !selectedPresenter && !selectedRoom && !selectedTime) {
+    // If no dropdown is selected, leave the default HTML content
     return;
   }
 
-  // Filter based on selection
+  // Filter based on selections
   const filteredData = mockData.filter(session => {
-    const matchesSessionName = session.sessionName === selectedSessionName;
-    const matchesPresenter = session.speaker === selectedPresenter;
-    const matchesRoom = session.room === selectedRoom;
-    const matchesTime = session.time === selectedTime;
+    const matchesSessionName = !selectedSessionName || session.sessionName === selectedSessionName;
+    const matchesPresenter = !selectedPresenter || session.speaker === selectedPresenter;
+    const matchesRoom = !selectedRoom || session.room === selectedRoom;
+    const matchesTime = !selectedTime || session.time === selectedTime;
 
     return matchesSessionName && matchesPresenter && matchesRoom && matchesTime;
   });
 
   if (filteredData.length === 0) {
-    const noResultsMessage = document.createElement('div');
-    noResultsMessage.className = 'no-results-message';
-    noResultsMessage.textContent = 'No sessions match all selected criteria';
-    cardGrid.appendChild(noResultsMessage);
+    roomDetailsContainer.innerHTML = `
+      <div class="no-results-message">
+        <p>No sessions match the selected criteria</p>
+      </div>
+    `;
   } else {
-    filteredData.forEach(session => {
-      const card = createCard(session);
-      cardGrid.appendChild(card);
-    });
+    // Show the first matching session
+    const session = filteredData[0];
+    
+    // Extract just the start time from the time range
+    const startTime = session.time.split(' - ')[0];
+    
+    // Update the room-details with the session information
+    roomDetailsContainer.innerHTML = `
+      <div class="room-header">
+        <p class="session-title">${session.sessionName}</p>
+        <p class="presenter-name">${session.speaker}</p>
+      </div>
+      <hr>
+      <div class="room-info">
+        <p class="room-title">${session.room}</p>
+        <p class="session-time">${startTime}</p>
+      </div>
+      <hr>
+      <div class="attendance">
+        <div class="attendance-item">
+          <span>Beginning: ${session.viewCount.start}</span>
+        </div>
+        <div class="attendance-item">
+          <span>Middle: ${session.viewCount.middle}</span>
+        </div>
+        <div class="attendance-item">
+          <span>End: ${session.viewCount.end}</span>
+        </div>
+      </div>
+    `;
   }
-}
-
-function createCard(session) {
-  const startTime = session.time.split(' - ')[0];
-
-  // Create card element
-  const card = document.createElement('div');
-  card.className = 'card';
-
-  card.innerHTML = `
-    <div class="card-top">
-      <div class="card-title">${session.topic}</div>
-      <div class="card-subtitle">${session.speaker}</div>
-    </div>
-    <hr>
-    <div class="card-mid">
-      <span>${startTime}</span>
-      <span>${session.room}</span>
-    </div>
-    <hr>
-    <div class="card-bottom">
-      <p>Beginning: ${session.viewCount.start}</p>
-      <hr>
-      <p>Middle: ${session.viewCount.middle}</p>
-      <hr>
-      <p>End: ${session.viewCount.end}</p>
-    </div>
-  `;
-
-  return card;
 }
 
 function autoFillBasedOnSelection(changedFieldId) {
@@ -221,7 +204,7 @@ function autoFillBasedOnSelection(changedFieldId) {
       break;
   }
 
-  if (matchingSessions.length > 0) {
+  if (matchingSessions.length === 1) {
     const sessionToUse = matchingSessions[0];
 
     if (changedFieldId !== 'sessionName') {
@@ -241,5 +224,6 @@ function autoFillBasedOnSelection(changedFieldId) {
     }
   }
 
-  displayCards();
+  // Update display after auto-filling
+  displaySessionDetails();
 }
