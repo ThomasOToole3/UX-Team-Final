@@ -113,7 +113,7 @@
 
                             <label for="beginningCount" style="margin-right: 10px; width: 110px;">Beginning:  </label>
 
-                            <input type="text" id="beginningCount" name="beginningCount" placeholder=" " style="width: 100px;">
+                            <input type="text" id="beginningCount" name="beginningCount" maxlength="3" inputmode="numeric" style="width: 100px;">
                         </div>
 
                     </div>
@@ -124,7 +124,7 @@
 
                             <label for="middleCount" style="margin-right: 10px; width: 110px;">Middle:</label>
 
-                            <input type="text" id="middleCount" name="middleCount" placeholder=" " style="width: 100px;">
+                            <input type="text" id="middleCount" name="middleCount" maxlength="3" inputmode="numeric" style="width: 100px;">
 
                         </div>
 
@@ -136,7 +136,7 @@
 
                             <label for="endCount" style="margin-right: 10px; width: 100px;">End:</label>
 
-                            <input type="text" id="endCount" name="endCount" placeholder=" " style="width: 100px;">
+                            <input type="text" id="endCount" name="endCount" maxlength="3" inputmode="numeric" style="width: 100px;">
 
                             <p id="endCount">
                                 <span id="errorMessage" class="hidden"></span>
@@ -203,6 +203,18 @@
             roomC: Math.floor(12),
             roomD: Math.floor(70),
         };
+
+        //function onlyNumInputs(input) {
+        //    input.addEventListener("input", function () {
+                // Remove any non-digit characters and limit to 2 digits
+        //        this.value = this.value.replace(/\D/g, '').slice(0, 3);
+        //    });
+        //}
+
+        //["beginningCount", "middleCount", "endCount"].forEach(function (id) {
+        //    const input = document.getElementById(id);
+        //    enforceNumericInput(input);
+        //});
 
         function validateOverage() {
             const endCountInput = document.getElementById("endCount");
