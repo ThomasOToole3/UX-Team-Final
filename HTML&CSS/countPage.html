@@ -2,18 +2,18 @@
 <html>
 
 <head>
-    <title>Code Camp</title>
+    <title>Code Camp Count</title>
     <link rel="stylesheet" type="text/css" href="projectStyleSheet.css">
     <style>
         .error {
             border: 2px solid red;
             box-shadow: 0 0 5px red;
         }
-    
+
         .hidden {
             display: none;
         }
-    
+
         #errorMessage {
             color: red;
             font-size: 0.9em;
@@ -50,34 +50,12 @@
 
                     <div class="grid-item">
                         <label for="sessionName" style="margin-right: 10px;">Session Name:</label>
-                        <select id="sessionName" name="sessionName" style="width: 200px;">
+                        <select id="sessionName" name="sessionName" style="width: 320px;">
                             <option value="">Select a session</option>
                             <option value="session1">Developing a Threat Modeling Mindset</option>
                             <option value="session2">Building a machine vision model</option>
                             <option value="session3">Top 10 AI security risks</option>
                             <option value="session4">Cross-platform graphics in C#</option>
-                            <script>
-                                document.getElementById('sessionName').addEventListener('change', function() {
-                                    var sessionName = document.getElementById('sessionName').value;
-                                    if (sessionName === 'session1') {
-                                        document.getElementById('roomName').value = 'roomA';
-                                        document.getElementById('timeslot').value = 'timeA';
-
-                                    }
-                                    else if (sessionName === 'session2') {
-                                            document.getElementById('roomName').value = 'roomB';
-                                            document.getElementById('timeslot').value = 'timeB';
-                                        }
-                                    else if (sessionName === 'session3') {
-                                            document.getElementById('roomName').value = 'roomC';
-                                            document.getElementById('timeslot').value = 'timeC';
-                                    }
-                                    else if (sessionName === 'session4') {
-                                            document.getElementById('roomName').value = 'roomD';
-                                            document.getElementById('timeslot').value = 'timeD';
-                                    }
-                                });
-                            </script>
                         </select>
                     </div>
 
@@ -133,10 +111,9 @@
 
                         <div class="grid-item" style="display: flex; align-items: center;">
 
-                            <label for="timeSlots" style="margin-right: 10px; width: 100px;">Beginning:</label>
+                            <label for="beginningCount" style="margin-right: 10px; width: 110px;">Beginning:  </label>
 
                             <input type="text" id="beginningCount" name="beginningCount" placeholder=" " style="width: 100px;">
-
                         </div>
 
                     </div>
@@ -145,7 +122,7 @@
 
                         <div class="grid-item" style="display: flex; align-items: center;">
 
-                            <label for="timeSlots" style="margin-right: 10px; width: 100px;">Middle:</label>
+                            <label for="middleCount" style="margin-right: 10px; width: 110px;">Middle:</label>
 
                             <input type="text" id="middleCount" name="middleCount" placeholder=" " style="width: 100px;">
 
@@ -157,21 +134,18 @@
 
                         <div class="grid-item" style="display: flex; align-items: center;">
 
-                            <label for="timeSlots" style="margin-right: 10px; width: 100px;">End:</label>
+                            <label for="endCount" style="margin-right: 10px; width: 100px;">End:</label>
 
                             <input type="text" id="endCount" name="endCount" placeholder=" " style="width: 100px;">
 
                             <p id="endCount">
-                            <span id="errorMessage" class="hidden"></span>
+                                <span id="errorMessage" class="hidden"></span>
 
                         </div>
 
                     </div>
 
                 </div>
-
-
-
 
         </form>
 
@@ -188,6 +162,7 @@
             <button class="small-button" type="button" id="dontSaveBtn">No</button>
         </div>
 
+        </div>
 
     </section>
 
@@ -198,59 +173,83 @@
     <footer>
     </footer>
     <script>
+        // some parts helped with by ChatGPT
+
+        document.getElementById('sessionName').addEventListener('change', function () {
+            var sessionName = document.getElementById('sessionName').value;
+            if (sessionName === 'session1') {
+                document.getElementById('roomName').value = 'roomA';
+                document.getElementById('timeslot').value = 'timeA';
+
+            }
+            else if (sessionName === 'session2') {
+                document.getElementById('roomName').value = 'roomB';
+                document.getElementById('timeslot').value = 'timeB';
+            }
+            else if (sessionName === 'session3') {
+                document.getElementById('roomName').value = 'roomC';
+                document.getElementById('timeslot').value = 'timeC';
+            }
+            else if (sessionName === 'session4') {
+                document.getElementById('roomName').value = 'roomD';
+                document.getElementById('timeslot').value = 'timeD';
+            }
+        });
+
+        // Room capacities
         const rooms = {
             roomA: Math.floor(100),
             roomB: Math.floor(20),
             roomC: Math.floor(12),
             roomD: Math.floor(70),
         };
-    
+
         function validateOverage() {
             const endCountInput = document.getElementById("endCount");
             const errorMessage = document.getElementById("errorMessage");
             const endCount = parseInt(endCountInput.value) || 0;
             const roomName = document.getElementById("roomName").value;
-    
-            // Clear previous error styles and messages
+
+            // Clear previous error messages
             endCountInput.classList.remove("error");
             errorMessage.textContent = "";
             errorMessage.classList.add("hidden");
-    
+
             if (!rooms[roomName]) {
                 alert("Please select a valid room.");
                 return;
             }
-    
+
             const roomCapacity = rooms[roomName];
             const overageLimit = roomCapacity > 40 ? roomCapacity * 1.4 : roomCapacity * 2;
-    
+
             if (endCount > overageLimit) {
-                // Highlight the input box and show the error message
+                // Highlight input box & show error message
                 endCountInput.classList.add("error");
                 errorMessage.textContent = `The count (${endCount}) exceeds the capacity limit for ${roomName} (${overageLimit.toFixed(0)}).`;
                 errorMessage.classList.remove("hidden");
             }
         }
-    
+
         function clearErrorOnFocus() {
-        const endCountInput = document.getElementById("endCount");
-        const errorMessage = document.getElementById("errorMessage");
+            const endCountInput = document.getElementById("endCount");
+            const errorMessage = document.getElementById("errorMessage");
 
-        // Clear error styles and hide the error message
-        endCountInput.classList.remove("error");
-        errorMessage.textContent = "";
-        errorMessage.classList.add("hidden");
-    }
+            // Clear error styles & hide the error message
+            endCountInput.classList.remove("error");
+            errorMessage.textContent = "";
+            errorMessage.classList.add("hidden");
+        }
 
-    // Add event listener to the Save button
-    document
-        .getElementById("originalSaveBtn")
-        .addEventListener("click", validateOverage);
+        // Event listener to the Save button
+        document
+            .getElementById("originalSaveBtn")
+            .addEventListener("click", validateOverage);
 
-    // Add event listener to the input box to clear error on focus
-    document
-        .getElementById("endCount")
-        .addEventListener("focus", clearErrorOnFocus);
+        // Event listener to the input box to clear error on focus
+        document
+            .getElementById("endCount")
+            .addEventListener("focus", clearErrorOnFocus);
     </script>
 
 </body>
